@@ -1,579 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BRG Risk Review Agent — Stellantis</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#ffffff;--bg2:#f7f7f5;--bg3:#f0efeb;
-  --text:#1a1a1a;--text2:#6b6b6b;
-  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
-  --r:8px;--rlg:12px;
-}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg3);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
 
-/* HEADER */
-.hdr{background:var(--bg);border-bottom:1px solid var(--border);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0}
-.hdr-left{display:flex;align-items:center;gap:10px}
-.hdr-logo{width:30px;height:30px;background:#1a1a1a;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hdr-logo svg{width:16px;height:16px}
-.hdr-title{font-size:14px;font-weight:600}
-.hdr-sub{font-size:11px;color:var(--text2);margin-top:1px}
-.api-wrap{display:flex;align-items:center;gap:8px}
-.api-wrap label{font-size:12px;color:var(--text2);white-space:nowrap}
-.api-wrap input{font-size:12px;padding:6px 10px;border:1px solid var(--border2);border-radius:var(--r);width:280px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit}
-.api-wrap input:focus{border-color:#555}
-.api-status{font-size:11px;padding:3px 8px;border-radius:99px;white-space:nowrap}
-.api-status.set{background:#EAF3DE;color:#3B6D11}
-.api-status.unset{background:#FAEEDA;color:#854F0B}
+BRG Risk Review Agent v2.0
+Stellantis (FCA US LLC) — Phase 1 Policy Active Through August 2026
+Anthropic API Key
 
-/* LAYOUT */
-.app{display:flex;flex:1;max-width:1120px;margin:1.5rem auto;width:100%;gap:1.25rem;padding:0 1.5rem 2rem}
-.sidebar{width:220px;flex-shrink:0;display:flex;flex-direction:column;gap:2px}
-.sb-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);padding:.75rem .75rem .4rem}
-.nav-btn{font-size:13px;padding:7px 12px;border-radius:var(--r);cursor:pointer;color:var(--text2);display:flex;align-items:center;gap:8px;border:none;background:none;width:100%;text-align:left;font-family:inherit}
-.nav-btn:hover{background:rgba(0,0,0,.05);color:var(--text)}
-.nav-btn.active{background:var(--bg);color:var(--text);font-weight:500;box-shadow:0 0 0 1px var(--border)}
-.badge{margin-left:auto;font-size:11px;background:var(--bg3);color:var(--text2);padding:1px 7px;border-radius:99px}
-.sb-footer{margin-top:auto;padding:.75rem;font-size:11px;color:var(--text2);line-height:1.6;border-top:1px solid var(--border)}
-.version-pill{display:inline-block;font-size:10px;background:var(--bg3);color:var(--text2);padding:1px 7px;border-radius:99px;margin-left:6px;font-weight:400;vertical-align:middle}
+Key required
+NAVIGATION
++ New review ◀ Past reviews
+0
+Screens against EO 14173, EO 14398, DOJ CRFI, Title VII, Stellantis Phase 1 policy, Career Pillar suspension, and the Three C's framework.
 
-/* MAIN PANEL */
-.panel{flex:1;background:var(--bg);border-radius:var(--rlg);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column}
-.topbar{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.topbar-title{font-size:15px;font-weight:600}
-.topbar-sub{font-size:12px;color:var(--text2);margin-top:2px}
-.new-btn{font-size:13px;color:var(--text2);border:1px solid var(--border2);border-radius:var(--r);padding:6px 13px;cursor:pointer;background:transparent;display:none;align-items:center;gap:6px;font-family:inherit}
-.new-btn:hover{background:var(--bg2)}
-.content{padding:1.5rem;flex:1;overflow-y:auto}
-.view{display:none}.view.active{display:block}
+Get an API key:
+console.anthropic.com
+New activity review
+Complete all fields for the most accurate assessment
+ACTIVITY DETAILS
+Activity name required
+BRG name
+Proposed date
+Activity description required
+Intended Three C's pillar alignment
+            Select...
+            Commerce — brand engagement, consumer insights, market activation
+            Community — volunteerism, philanthropy, local market engagement
+            Culture — inclusive programming, storytelling, awareness
+            Career — mentoring, leadership development (currently suspended)
+            Unclear / not sure
+          
+SCOPE & STRUCTURE
+Audience eligibility
+              Select...
+              Open to all employees
+              Open to all, targeted outreach to specific groups
+              Restricted by identity/demographic
+              Restricted by role/level only
+              External attendees included
+            
+Venue / location
+              Select...
+              Internal (Stellantis facility)
+              External venue, company-branded
+              External venue, unbranded
+              Virtual / hybrid
+            
+Components involved check all that apply
 
-/* FORM */
-.sdiv{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);padding-bottom:.5rem;border-bottom:1px solid var(--border);margin-bottom:1rem;margin-top:1.25rem}
-.sdiv:first-child{margin-top:0}
-.field{margin-bottom:1rem}
-.lbl{font-size:13px;font-weight:500;margin-bottom:5px;display:block}
-.lbl span{font-weight:400;color:var(--text2);font-size:12px;margin-left:4px}
-.field input,.field select,.field textarea{width:100%;font-size:13px;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);outline:none;font-family:inherit}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#555;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
-.field textarea{resize:vertical;min-height:82px;line-height:1.5}
-.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.cbgroup{display:flex;flex-direction:column;gap:7px}
-.cbrow{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;user-select:none}
-.cbrow input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:#1a1a1a;flex-shrink:0}
-.run-btn{background:#1a1a1a;color:#fff;border:none;padding:10px 24px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;margin-top:.75rem;font-family:inherit}
-.run-btn:hover{background:#333}
-.run-btn:disabled{opacity:.45;cursor:not-allowed}
+Corporate funding or budget allocation
 
-/* LOADING */
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1rem;gap:1rem;color:var(--text2)}
-.spinner{width:30px;height:30px;border:2px solid var(--border);border-top-color:var(--text2);border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+Company-branded materials or communications
 
-/* RESULT */
-.risk-banner{border-radius:var(--rlg);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:flex-start;gap:12px}
-.risk-banner.high{background:#FCEBEB;border:1px solid #F09595}
-.risk-banner.medium{background:#FAEEDA;border:1px solid #FAC775}
-.risk-banner.low{background:#EAF3DE;border:1px solid #C0DD97}
-.rlabel{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.risk-banner.high .rlabel{color:#A32D2D}
-.risk-banner.medium .rlabel{color:#854F0B}
-.risk-banner.low .rlabel{color:#3B6D11}
-.rtitle{font-size:15px;font-weight:500;margin-top:3px;line-height:1.4}
-.risk-banner.high .rtitle{color:#501313}
-.risk-banner.medium .rtitle{color:#412402}
-.risk-banner.low .rtitle{color:#173404}
-.ricon{font-size:26px;flex-shrink:0;margin-top:1px}
-.pillar-chip{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:4px 13px;font-size:12px;font-weight:500;margin-bottom:1rem;border:1px solid transparent}
-.pc-commerce{background:#E8F0FB;color:#1A4E8A;border-color:#BDD0F5}
-.pc-community{background:#E8F6EC;color:#1A6B35;border-color:#B6E0C0}
-.pc-culture{background:#F3EBF9;color:#6B2E8A;border-color:#D9C0ED}
-.pc-career{background:#FCEBEB;color:#A32D2D;border-color:#F09595}
-.pc-unclear{background:var(--bg2);color:var(--text2);border-color:var(--border)}
-.fcard{border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden}
-.fhead{padding:.7rem 1rem;display:flex;align-items:center;gap:10px;background:var(--bg2)}
-.tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px}
-.th{background:#FCEBEB;color:#A32D2D}
-.tm{background:#FAEEDA;color:#854F0B}
-.tl{background:#EAF3DE;color:#3B6D11}
-.ti{background:#E6F1FB;color:#185FA5}
-.ftitle{font-size:13px;font-weight:500}
-.fbody{padding:.75rem 1rem;font-size:13px;line-height:1.6;color:var(--text2)}
-.steps{margin-top:1.25rem}
-.srow{display:flex;gap:10px;margin-bottom:.75rem;align-items:flex-start}
-.snum{width:22px;height:22px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;color:var(--text2)}
-.stext{font-size:13px;line-height:1.5;padding-top:2px}
-.appbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-top:1.25rem}
-.apptitle{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem}
-.appchip{display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:12px;margin:3px 4px 3px 0}
+External fundraising or charitable giving component
 
-/* HISTORY */
-.hrow{border:1px solid var(--border);border-radius:var(--r);padding:.75rem 1rem;margin-bottom:.75rem;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
-.hrow:hover{background:var(--bg2)}
-.hdot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.hdot.high{background:#E24B4A}.hdot.medium{background:#EF9F27}.hdot.low{background:#639922}
-.htitle{font-size:13px;font-weight:500}
-.hmeta{font-size:12px;color:var(--text2);margin-top:2px}
-.empty{text-align:center;padding:3rem 1rem;color:var(--text2);font-size:13px;line-height:1.8}
-</style>
-</head>
-<body>
+External partner or community organization involved
 
-<div class="hdr">
-  <div class="hdr-left">
-    <div class="hdr-logo">
-      <svg viewBox="0 0 24 24" fill="white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <div>
-      <div class="hdr-title">BRG Risk Review Agent <span class="version-pill">v2.0</span></div>
-      <div class="hdr-sub">Stellantis (FCA US LLC) — Phase 1 Policy Active Through August 2026</div>
-    </div>
-  </div>
-  <div class="api-wrap">
-    <label for="api-key">Anthropic API Key</label>
-    <input type="password" id="api-key" placeholder="sk-ant-..." oninput="updateApiStatus()" />
-    <span class="api-status unset" id="api-status">Key required</span>
-  </div>
-</div>
+Public-facing communications (press, social, web)
 
-<div class="app">
-  <div class="sidebar">
-    <div class="sb-label">Navigation</div>
-    <button id="nav-new" class="nav-btn active" onclick="showView('form')">&#43; New review</button>
-    <button id="nav-hist" class="nav-btn" onclick="showView('history')">&#9664; Past reviews <span class="badge" id="hcount">0</span></button>
-    <div class="sb-footer">
-      Screens against EO 14173, EO 14398, DOJ CRFI, Title VII, Stellantis Phase 1 policy, Career Pillar suspension, and the Three C's framework.<br><br>
-      <strong>Get an API key:</strong><br>console.anthropic.com
-    </div>
-  </div>
+Training, mentoring, or leadership development component
 
-  <div class="panel">
-    <div class="topbar">
-      <div>
-        <div class="topbar-title" id="tb-title">New activity review</div>
-        <div class="topbar-sub" id="tb-sub">Complete all fields for the most accurate assessment</div>
-      </div>
-      <button class="new-btn" id="new-btn" onclick="resetForm()">&#43; New review</button>
-    </div>
-    <div class="content">
+Vendor or supplier involvement
 
-      <!-- FORM -->
-      <div id="view-form" class="view active">
-        <div class="sdiv">Activity details</div>
-        <div class="field">
-          <label class="lbl">Activity name <span>required</span></label>
-          <input type="text" id="f-name" placeholder="e.g. Women in Leadership mentorship cohort kickoff" />
-        </div>
-        <div class="g2">
-          <div class="field">
-            <label class="lbl">BRG name</label>
-            <input type="text" id="f-brg" placeholder="e.g. Women's Network" />
-          </div>
-          <div class="field">
-            <label class="lbl">Proposed date</label>
-            <input type="text" id="f-date" placeholder="e.g. September 2026" />
-          </div>
-        </div>
-        <div class="field">
-          <label class="lbl">Activity description <span>required</span></label>
-          <textarea id="f-desc" placeholder="Describe what is planned: format, purpose, audience, speakers, materials, outcomes expected..."></textarea>
-        </div>
-        <div class="field">
-          <label class="lbl">Intended Three C's pillar alignment</label>
-          <select id="f-pillar">
-            <option value="">Select...</option>
-            <option>Commerce — brand engagement, consumer insights, market activation</option>
-            <option>Community — volunteerism, philanthropy, local market engagement</option>
-            <option>Culture — inclusive programming, storytelling, awareness</option>
-            <option>Career — mentoring, leadership development (currently suspended)</option>
-            <option>Unclear / not sure</option>
-          </select>
-        </div>
-
-        <div class="sdiv">Scope &amp; structure</div>
-        <div class="g2">
-          <div class="field">
-            <label class="lbl">Audience eligibility</label>
-            <select id="f-audience">
-              <option value="">Select...</option>
-              <option>Open to all employees</option>
-              <option>Open to all, targeted outreach to specific groups</option>
-              <option>Restricted by identity/demographic</option>
-              <option>Restricted by role/level only</option>
-              <option>External attendees included</option>
-            </select>
-          </div>
-          <div class="field">
-            <label class="lbl">Venue / location</label>
-            <select id="f-venue">
-              <option value="">Select...</option>
-              <option>Internal (Stellantis facility)</option>
-              <option>External venue, company-branded</option>
-              <option>External venue, unbranded</option>
-              <option>Virtual / hybrid</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label class="lbl">Components involved <span>check all that apply</span></label>
-          <div class="cbgroup">
-            <label class="cbrow"><input type="checkbox" id="c-funding" /> Corporate funding or budget allocation</label>
-            <label class="cbrow"><input type="checkbox" id="c-brand" /> Company-branded materials or communications</label>
-            <label class="cbrow"><input type="checkbox" id="c-fundraise" /> External fundraising or charitable giving component</label>
-            <label class="cbrow"><input type="checkbox" id="c-partner" /> External partner or community organization involved</label>
-            <label class="cbrow"><input type="checkbox" id="c-public" /> Public-facing communications (press, social, web)</label>
-            <label class="cbrow"><input type="checkbox" id="c-training" /> Training, mentoring, or leadership development component</label>
-            <label class="cbrow"><input type="checkbox" id="c-vendor" /> Vendor or supplier involvement</label>
-            <label class="cbrow"><input type="checkbox" id="c-hrtrack" /> Participation or completion tracked in HR systems</label>
-          </div>
-        </div>
-
-        <div class="sdiv">Funding &amp; spend</div>
-        <div class="g2">
-          <div class="field">
-            <label class="lbl">Estimated budget</label>
-            <select id="f-budget">
-              <option value="">Select...</option>
-              <option>No budget / volunteer only</option>
-              <option>Under $1,000</option>
-              <option>$1,000–$10,000</option>
-              <option>$10,000–$50,000</option>
-              <option>Over $50,000</option>
-            </select>
-          </div>
-          <div class="field">
-            <label class="lbl">Funding source</label>
-            <select id="f-fundsource">
-              <option value="">Select...</option>
-              <option>BRG operating budget</option>
-              <option>Departmental / business unit budget</option>
-              <option>Corporate foundation or grants</option>
-              <option>Employee donations</option>
-              <option>External sponsorships</option>
-              <option>Mixed / not yet determined</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="sdiv">History &amp; prior review</div>
-        <div class="field">
-          <label class="lbl">Has this activity run informally in prior cycles?</label>
-          <select id="f-history">
-            <option value="">Select...</option>
-            <option>No, this is new</option>
-            <option>Yes, ran informally without budget or HR tracking</option>
-            <option>Yes, ran with budget but no formal OGC review</option>
-            <option>Yes, and it was previously reviewed by OGC or HR</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="lbl">Has OGC or HR reviewed any part of this activity?</label>
-          <select id="f-reviewed">
-            <option value="">Select...</option>
-            <option>No prior review</option>
-            <option>Informal discussion only</option>
-            <option>Formal OGC review completed</option>
-            <option>HR review completed</option>
-            <option>Both OGC and HR reviewed</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="lbl">Anything else the reviewer should know? <span>optional</span></label>
-          <textarea id="f-notes" rows="2" placeholder="Context, concerns, prior similar events, planned communications, etc."></textarea>
-        </div>
-        <button class="run-btn" id="run-btn" onclick="runReview()">&#128737; Run risk review</button>
-      </div>
-
-      <!-- LOADING -->
-      <div id="view-loading" class="view">
-        <div class="loading">
-          <div class="spinner"></div>
-          <div id="load-msg" style="font-size:13px">Analyzing against Phase 1 policy and EO 14398...</div>
-        </div>
-      </div>
-
-      <!-- RESULT -->
-      <div id="view-result" class="view">
-        <div id="result-content"></div>
-      </div>
-
-      <!-- HISTORY -->
-      <div id="view-history" class="view">
-        <div id="history-list"></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script>
-const reviews=[];
-let loadInt;
-
-const SYSTEM_PROMPT=`You are the BRG Risk Review Agent for Stellantis (FCA US LLC), a federal contractor and global automotive company. Your role is to screen proposed Business Resource Group (BRG) activities for legal and policy risk before money moves or commitments are made.
-
-LEGAL FRAMEWORK:
-
-1. EO 14173 (January 2025): Made clear that affirmative action was effectively eliminated and "illegal DEI" was prohibited. What constitutes illegal DEI was not defined, creating broad enforcement discretion — programs legal 18 months ago are now potential liabilities. Requires federal contractors to certify they do not operate DEI programs that violate federal anti-discrimination laws. Noncompliance triggers False Claims Act (FCA) liability. Stellantis is directly subject to this order as a federal contractor.
-
-2. DOJ Civil Rights Fraud Initiative — CRFI (May 2025): Heavily funded enforcement agency pursuing contractors for civil rights violations under the FCA. Penalties: civil and criminal liability, treble damages, debarment, whistleblower suits. Any employee, competitor, or activist can initiate action. 6,825 contractor audits projected per year across 430 federal agencies.
-
-3. EO 14398 (March 2026): Defines "racially discriminatory DEI activities" as disparate treatment based on race or ethnicity in recruitment, employment (hiring, promotions), contracting, program participation, or allocation of resources. Program participation explicitly includes training, mentoring, leadership development, educational opportunities, clubs, associations, and similar opportunities. Requires compliance clause in all federal contracts, adequate recordkeeping, and flow-down to subcontractors. Penalties: contract termination, debarment, FCA liability.
-
-4. Title VII: Prohibits disparate treatment by race, color, religion, sex, or national origin. Post-Ames: lower threshold for reverse discrimination claims. Post-Muldrow: harm threshold lowered to "some harm."
-
-5. IBM Settlement (April 2026): First FCA resolution under CRFI — $17.08M. DOJ attacked diverse interview slates, compensation tied to demographic targets, and training/mentoring/development programs restricted by race or sex. Covered practices dating to 2019. DOJ reserved criminal rights and debarment. OPEN QUESTION: programs "open to all" but designed to benefit specific groups may face same exposure — flag these for OGC review.
-
-STELLANTIS INTERNAL POLICY (May 2026):
-
-Current Phase: Phase 1 — Stabilize and Assess (Now through August 2026)
-Phase 1 directives: pause BRG branding and new program launches; audit all BRG programming; sundown mentoring programs and redirect to departmental programs; standardize event communications; host compliance training for BRG Co-Leads; suspend Career Pillar for each BRG; conduct advisory audit in September 2026.
-
-Approved Pillars — Three C's:
-- Commerce: brand engagement, consumer insights, product feedback, market activation, customer connection
-- Community: volunteerism, philanthropy partnerships, local market engagement aligned to company priorities
-- Culture: inclusive programming, storytelling, awareness, belonging and connection
-
-Career Pillar — STRATEGIC PAUSE (currently in effect):
-The following are suspended unless explicitly approved by Leadership, Legal, HR, or D&I governance:
-- Individual BRG mentoring programs
-- Individual BRG leadership summits
-- Surveys targeted only to specific BRG populations
-- BRG-led applications for external awards or recognition
-- Language stating or implying BRGs provide leadership development
-- Career programming limited to a specific identity group or BRG membership
-
-Approval Requirements:
-- Corporate-funded activities: BRG Operations and Finance approval required
-- External partners: OGC review before any commitment
-- Public-facing communications: Brand and Communications approval required
-- Fundraising: Corporate Foundation sign-off required
-- External venues with company branding: OGC and Brand review required
-- Training/mentoring programs restricting by demographic: OGC legal clearance before announcement
-- Any Career Pillar activity: explicit approval from Leadership, Legal, HR, or D&I governance
-
-Funding Guidelines:
-- Corporate-funded activities restricting participation by race or ethnicity: prohibited
-- Mixed-funding (employee donations + corporate) restricting by demographic: OGC clearance required
-- External sponsorships: vendor review and brand approval required
-
-Public Conduct: Scope is not limited to internal programs. Public conduct and website content that could attract DOJ/EEOC attention is in scope.
-
-SPECIAL FLAGS — ALWAYS SURFACE THESE:
-1. Career Pillar activity: mentoring, leadership development, career programming, or summits are suspended under Phase 1 regardless of audience eligibility
-2. "Open to all, designed to benefit one group": flag for OGC per IBM open question
-3. HR tracking of completion or participation: significant risk escalator
-4. Public-facing language: flag for Brand review and note DOJ/EEOC scrutiny of public content
-5. Informal programs being formalized with budget or HR tracking: flag history as risk escalator
-
-RISK LEVELS:
-- HIGH: Activity contains a structural feature likely violating EO 14398, EO 14173, or Title VII, creates FCA exposure, or falls within Career Pillar suspension without documented approval.
-- MEDIUM: Activity has components that could create legal exposure depending on implementation, or is in tension with Phase 1 directives.
-- LOW: Activity appears structurally sound and aligns with an approved Three C's pillar. No legal red flags, but required approval workflows must be followed.
-
-OUTPUT FORMAT — respond ONLY with a valid JSON object, no markdown, no preamble:
-{
-  "riskLevel": "HIGH" | "MEDIUM" | "LOW",
-  "pillarAlignment": "Commerce" | "Community" | "Culture" | "Career (Suspended)" | "Unclear",
-  "summary": "One sentence summarizing the overall risk finding",
-  "findings": [
-    {
-      "severity": "HIGH" | "MEDIUM" | "LOW" | "INFO",
-      "title": "Short finding title",
-      "detail": "2-3 sentences explaining the specific risk, citing the relevant policy or EO"
-    }
-  ],
-  "nextSteps": ["Step 1", "Step 2"],
-  "requiredApprovals": ["OGC", "Brand", "etc."]
-}`;
-
-const loadMsgs=[
-  'Analyzing against Phase 1 policy and EO 14398...',
-  'Checking Career Pillar suspension status...',
-  'Assessing Three C\'s pillar alignment...',
-  'Reviewing funding and audience structure...',
-  'Checking for HR tracking exposure...',
-  'Compiling findings and next steps...'
-];
-
-function updateApiStatus(){
-  const k=document.getElementById('api-key').value.trim();
-  const el=document.getElementById('api-status');
-  if(k.startsWith('sk-')){el.textContent='Key set';el.className='api-status set';}
-  else{el.textContent='Key required';el.className='api-status unset';}
-}
-
-function showView(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+name).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const nb=document.getElementById('new-btn');
-  if(name==='form'){
-    document.getElementById('nav-new').classList.add('active');
-    document.getElementById('tb-title').textContent='New activity review';
-    document.getElementById('tb-sub').textContent='Complete all fields for the most accurate assessment';
-    nb.style.display='none';
-  }else if(name==='history'){
-    document.getElementById('nav-hist').classList.add('active');
-    document.getElementById('tb-title').textContent='Past reviews';
-    document.getElementById('tb-sub').textContent='Select a review to see the full report';
-    nb.style.display='flex';
-    renderHistory();
-  }else if(name==='result'){
-    document.getElementById('tb-title').textContent='Risk assessment';
-    document.getElementById('tb-sub').textContent='Review findings and recommended next steps';
-    nb.style.display='flex';
-  }
-}
-
-function resetForm(){showView('form');}
-
-function getChecked(){
-  const map={
-    'c-funding':'Corporate funding or budget allocation',
-    'c-brand':'Company-branded materials or communications',
-    'c-fundraise':'External fundraising component',
-    'c-partner':'External partner or community organization',
-    'c-public':'Public-facing communications',
-    'c-training':'Training, mentoring, or leadership development',
-    'c-vendor':'Vendor or supplier involvement',
-    'c-hrtrack':'Participation/completion tracked in HR systems'
-  };
-  return Object.keys(map).filter(id=>document.getElementById(id).checked).map(id=>map[id]);
-}
-
-async function runReview(){
-  const apiKey=document.getElementById('api-key').value.trim();
-  if(!apiKey.startsWith('sk-')){alert('Please enter your Anthropic API key in the header field first.\n\nGet one at: console.anthropic.com');return;}
-  const name=document.getElementById('f-name').value.trim();
-  const desc=document.getElementById('f-desc').value.trim();
-  if(!name||!desc){alert('Please enter an activity name and description.');return;}
-
-  const brg=document.getElementById('f-brg').value;
-  const date=document.getElementById('f-date').value;
-  const pillar=document.getElementById('f-pillar').value;
-  const audience=document.getElementById('f-audience').value;
-  const venue=document.getElementById('f-venue').value;
-  const budget=document.getElementById('f-budget').value;
-  const fundsource=document.getElementById('f-fundsource').value;
-  const hist=document.getElementById('f-history').value;
-  const reviewed=document.getElementById('f-reviewed').value;
-  const notes=document.getElementById('f-notes').value;
-  const components=getChecked();
-
-  showView('loading');
-  document.getElementById('run-btn').disabled=true;
-  let mi=0;
-  loadInt=setInterval(()=>{
-    mi=(mi+1)%loadMsgs.length;
-    const el=document.getElementById('load-msg');
-    if(el) el.textContent=loadMsgs[mi];
-  },1800);
-
-  const userMsg=`Please assess the following BRG activity:
-
-Activity name: ${name}
-BRG: ${brg||'Not specified'}
-Proposed date: ${date||'Not specified'}
-Intended pillar alignment: ${pillar||'Not specified'}
-Description: ${desc}
-Audience eligibility: ${audience||'Not specified'}
-Venue: ${venue||'Not specified'}
-Components involved: ${components.length?components.join(', '):'None selected'}
-Estimated budget: ${budget||'Not specified'}
-Funding source: ${fundsource||'Not specified'}
-Prior activity history: ${hist||'Not specified'}
-Prior OGC/HR review: ${reviewed||'Not specified'}
-Additional notes: ${notes||'None'}`;
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-calls':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:SYSTEM_PROMPT,messages:[{role:'user',content:userMsg}]})
-    });
-    const data=await res.json();
-    clearInterval(loadInt);
-    if(data.error){throw new Error(data.error.message);}
-    const raw=data.content.map(b=>b.text||'').join('');
-    const clean=raw.replace(/```json|```/g,'').trim();
-    const result=JSON.parse(clean);
-    reviews.unshift({name,brg,date,result,timestamp:new Date()});
-    document.getElementById('hcount').textContent=reviews.length;
-    renderResult(result);
-    showView('result');
-  }catch(e){
-    clearInterval(loadInt);
-    let msg=e.message||"Unknown error";
-    let extra="";
-    if(msg.includes("Failed to fetch")||msg.includes("NetworkError")||msg.includes("Load failed")){
-      extra="<br><br><strong>Browser is blocking the request.</strong> Try opening this file in <strong>Firefox</strong> instead of Chrome or Edge — Firefox handles local file CORS more permissively. Right-click the file and choose Open With Firefox.";
-    }
-    document.getElementById("result-content").innerHTML="<div style="padding:1.5rem;font-size:13px;color:#6b6b6b;line-height:1.8"><strong>Review could not be completed.</strong><br><br>Error: <code>"+esc(msg)+"</code>"+extra+"</div>";
-    showView("result");
-  }
-  document.getElementById('run-btn').disabled=false;
-}
-
-function pc(p){
-  if(!p)return'pc-unclear';
-  const pl=p.toLowerCase();
-  if(pl.includes('commerce'))return'pc-commerce';
-  if(pl.includes('community'))return'pc-community';
-  if(pl.includes('culture'))return'pc-culture';
-  if(pl.includes('career'))return'pc-career';
-  return'pc-unclear';
-}
-
-function renderResult(r){
-  const lvl=(r.riskLevel||'MEDIUM').toUpperCase();
-  const ll=lvl.toLowerCase();
-  const icons={HIGH:'&#9888;',MEDIUM:'&#9888;',LOW:'&#10003;'};
-  const pillar=r.pillarAlignment||'Unclear';
-
-  let html=`<div class="risk-banner ${ll}">
-    <div class="ricon">${icons[lvl]||'&#9888;'}</div>
-    <div>
-      <div class="rlabel">${lvl} RISK</div>
-      <div class="rtitle">${esc(r.summary||'')}</div>
-    </div>
-  </div>
-  <div><span class="pillar-chip ${pc(pillar)}">Pillar: ${esc(pillar)}</span></div>`;
-
-  if(r.findings&&r.findings.length){
-    html+=`<div class="sdiv">Findings</div>`;
-    r.findings.forEach(f=>{
-      const s=(f.severity||'INFO').toUpperCase();
-      const tc=s==='HIGH'?'th':s==='MEDIUM'?'tm':s==='LOW'?'tl':'ti';
-      html+=`<div class="fcard"><div class="fhead"><span class="tag ${tc}">${s}</span><span class="ftitle">${esc(f.title||'')}</span></div><div class="fbody">${esc(f.detail||'')}</div></div>`;
-    });
-  }
-  if(r.nextSteps&&r.nextSteps.length){
-    html+=`<div class="steps"><div class="sdiv">Recommended next steps</div>`;
-    r.nextSteps.forEach((s,i)=>{html+=`<div class="srow"><div class="snum">${i+1}</div><div class="stext">${esc(s)}</div></div>`;});
-    html+=`</div>`;
-  }
-  if(r.requiredApprovals&&r.requiredApprovals.length){
-    html+=`<div class="appbox"><div class="apptitle">Required approvals before proceeding</div><div>${r.requiredApprovals.map(a=>`<span class="appchip">&#10003; ${esc(a)}</span>`).join('')}</div></div>`;
-  }
-  document.getElementById('result-content').innerHTML=html;
-}
-
-function renderHistory(){
-  const el=document.getElementById('history-list');
-  if(!reviews.length){el.innerHTML=`<div class="empty">No reviews yet.<br>Submit a new activity to get started.</div>`;return;}
-  el.innerHTML=reviews.map((h,i)=>{
-    const lvl=(h.result.riskLevel||'MEDIUM').toLowerCase();
-    const dt=h.timestamp.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-    return `<div class="hrow" onclick="viewH(${i})"><div class="hdot ${lvl}"></div><div><div class="htitle">${esc(h.name)}</div><div class="hmeta">${esc(h.brg||'BRG not specified')} &middot; ${dt}</div></div></div>`;
-  }).join('');
-}
-
-function viewH(i){renderResult(reviews[i].result);showView('result');}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-</script>
-</body>
-</html>
+Participation or completion tracked in HR systems
+FUNDING & SPEND
+Estimated budget
+              Select...
+              No budget / volunteer only
+              Under $1,000
+              $1,000–$10,000
+              $10,000–$50,000
+              Over $50,000
+            
+Funding source
+              Select...
+              BRG operating budget
+              Departmental / business unit budget
+              Corporate foundation or grants
+              Employee donations
+              External sponsorships
+              Mixed / not yet determined
+            
+HISTORY & PRIOR REVIEW
+Has this activity run informally in prior cycles?
+            Select...
+            No, this is new
+            Yes, ran informally without budget or HR tracking
+            Yes, ran with budget but no formal OGC review
+            Yes, and it was previously reviewed by OGC or HR
+          
+Has OGC or HR reviewed any part of this activity?
+            Select...
+            No prior review
+            Informal discussion only
+            Formal OGC review completed
+            HR review completed
+            Both OGC and HR reviewed
+          
+Anything else the reviewer should know? optional
+🛡 Run risk review
